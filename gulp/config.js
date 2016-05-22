@@ -12,6 +12,7 @@ module.exports = {
   dist: root + '/dist/',
   jade: root + '/jade/',
   guide: root + '/guide/',
+  guideCss:['../src/common/css/style.css'],
   siteName:'StyleGuide',
   sassOptions: {
     includePaths: ['node_modules/'],

@@ -12,7 +12,7 @@ var frontnote = require('frontnote');
 var note = new frontnote({//FrontNoteの設定
   out: './guide/',
   title: config.siteName,
-  css: ['../src/common/css/style.css', '//cdnjs.cloudflare.com/ajax/libs/uikit/2.26.2/css/uikit.min.css', '//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css']
+  css: config.guideCss
 });
 
 // browserSync

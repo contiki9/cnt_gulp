@@ -35,3 +35,14 @@ gulp build
 ```
 gulp check
 ```
+/src/にあるSASS,CSSからStyleGuideを作成
+
+```
+gulp frontnote
+```
+
+自動リロードさせながらstyleGuide使いたい場合
+
+```
+gulp guide
+```
