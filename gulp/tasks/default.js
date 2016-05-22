@@ -27,11 +27,16 @@ gulp.task('bs-reload', function () {
 gulp.task('sass', function () {
   console.log('--------- sass task ----------');
   return gulp.src(config.sass + '**/*.scss')
-          .pipe(plumber())
+          .pipe(plumber({
+            errorHandler: function (err) {
+              console.log(err.messageFormatted);
+              this.emit('end');
+            }
+          }))
           .pipe(sass())
           .pipe(pleeease({
             sass: true,
-            autoprefixer: false,
+            autoprefixer: true,
             minifier: true,
             mqpacker: true
           }))

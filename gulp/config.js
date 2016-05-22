@@ -11,6 +11,8 @@ module.exports = {
   data: root + '/src/_data/',
   dist: root + '/dist/',
   jade: root + '/jade/',
+  guide: root + '/guide/',
+  siteName:'StyleGuide',
   sassOptions: {
     includePaths: ['node_modules/'],
     outputStyle: 'compressed'
