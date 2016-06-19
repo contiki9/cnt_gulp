@@ -6,7 +6,6 @@ var pleeease = require('gulp-pleeease');
 var plumber = require('gulp-plumber');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync');
-var styledocco = require('gulp-styledocco');
 
 var frontnote = require('frontnote');
 var note = new frontnote({//FrontNoteの設定
