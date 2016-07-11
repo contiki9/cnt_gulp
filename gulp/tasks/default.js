@@ -20,62 +20,64 @@ gulp.task('browser-sync', function () {
 });
 
 gulp.task('bs-reload', function () {
-  browserSync.reload();
+	browserSync.reload();
 });
 
 // sass
 gulp.task('sass', function () {
-  console.log('--------- sass task ----------');
-  return gulp.src(config.sass + '**/*.scss')
-          .pipe(plumber({
-            errorHandler: function (err) {
-              console.log(err.messageFormatted);
-              this.emit('end');
-            }
-          }))
-          .pipe(sass())
-          .pipe(pleeease({
-            sass: true,
-            autoprefixer: true,
-            minifier: true,
-            mqpacker: true
-          }))
-          .pipe(gulp.dest(config.css));
+	console.log('--------- sass task ----------');
+	return gulp.src(config.sass + '**/*.scss')
+					.pipe(plumber({
+						errorHandler: function (err) {
+							console.log(err.messageFormatted);
+							this.emit('end');
+						}
+					}))
+					.pipe(sass())
+					.pipe(pleeease({
+						sass: true,
+						autoprefixer: true,
+						minifier: true,
+						mqpacker: true
+					}))
+					.pipe(gulp.dest(config.css));
 });
 
 //jade
 gulp.task("jade", function () {
-  gulp.src(["./jade/**/*.jade"])
-          .pipe(plumber())
-          .pipe(jade({
-            compile: {
-              options: {
-                pretty: true,
-                data: {
-                  // コンパイル時に渡しておきたいオブジェクト
-                },
-                basedir: '<%= path.src %>/jade'
-              },
-              files: [{
-                  expand: true,
-                  cwd: '<%= path.src %>/jade',
-                  src: '**/!(_)*.jade',
-                  dest: '<%= path.dist %>',
-                  ext: '.html'
-                }]
-            }
-          }))
-          .pipe(gulp.dest("./src/"));
+	//gulp.src([config.jade + './**/*.jade'])
+	gulp.src([config.jade + '**/*.jade', '!' + config.jade + '**/_*.jade'])
+					.pipe(plumber())
+					.pipe(jade({
+						pretty: true,
+						compile: {
+							options: {
+								//pretty: true,
+								data: {
+									// コンパイル時に渡しておきたいオブジェクト
+								},
+								basedir: '<%= path.src %>/jade'
+							},
+							files: [{
+									expand: true,
+									cwd: '<%= path.src %>/jade',
+									src: '**/!(_)*.jade',
+									dest: '<%= path.dist %>',
+									ext: '.html'
+								}]
+						}
+					}))
+					.pipe(gulp.dest(config.src));
 });
 
 var defaultTask = function (callback) {
-  gulp.watch([config.sass + '**/*.scss'], ['sass'], ['bs-reload']);
-  gulp.watch([config.src + '**/*.html'], ['bs-reload']);
-  gulp.watch([config.css + '**/*.css'], ['bs-reload']);
-  gulp.watch([config.js + '**/*.js'], ['bs-reload']);
-  gulp.watch([config.img + '**/*.img'], ['bs-reload']);
-  gulp.watch([config.jade + '**/*.jade'], ['jade'], ['bs-reload']);
-  callback();
+	gulp.watch([config.sass + '**/*.scss'], ['sass'], ['bs-reload']);
+	gulp.watch([config.src + '**/*.html'], ['bs-reload']);
+	gulp.watch([config.css + '**/*.css'], ['bs-reload']);
+	gulp.watch([config.js + '**/*.js'], ['bs-reload']);
+	gulp.watch([config.img + '**/*.img'], ['bs-reload']);
+	gulp.watch([config.jade + '**/*.jade'], ['jade'], ['bs-reload']);
+	callback();
 };
 
 gulp.task('default', ['browser-sync'], defaultTask);
